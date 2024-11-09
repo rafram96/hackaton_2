@@ -48,6 +48,8 @@ Existen dos roles principales: **Administrador** (`admin`) y **Cliente** (`clien
 
 
 
+
+
 ### Endpoints
 
 Cada endpoint incluye la descripción y el detalle de los parámetros de entrada y salida. Recuerden que algunos endpoints requieren autenticación (🔐), y es necesario incluir el token en la cabecera de la solicitud.
