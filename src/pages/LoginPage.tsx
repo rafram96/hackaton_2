@@ -1,4 +1,3 @@
-import img4 from "@assets/Img4.jpg";
 import Button from "../components/Button";
 import LoginForm from "../components/LoginForm";
 
@@ -15,12 +14,10 @@ export default function LoginPage() {
 				<section className="login-section flex flex-col items-center p-4 text-center">
 					<h2 className="title">Bienvenido de vuelta</h2>
 					<p>Inicia sesión para empezar a usar Uber</p>
-					<img src={img4} alt="uber" />
 				</section>
 				<section className="w-1/2 flex flex-col items-center p-4 text-center">
 					<h2 className="text-2xl font-semibold mb-2">Bienvenido de vuelta</h2>
 					<p className="text-gray-600 mb-4">Inicia sesión para empezar a usar Uber</p>
-					<img src={img4} alt="uber" className="w-3/4" />
 				</section>
 			</article>
 		</main>
