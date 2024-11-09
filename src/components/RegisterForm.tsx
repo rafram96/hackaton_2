@@ -1,12 +1,7 @@
 import { ChangeEvent, FormEvent } from "react";
-
-interface RegisterFormProps {
-	
-}
-
 import { useState } from "react";
 
-export default function RegisterForm(props: RegisterFormProps) {
+export default function RegisterForm() {
 	const [formData, setFormData] = useState({
 		username: "",
 		password: "",
