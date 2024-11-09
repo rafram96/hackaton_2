@@ -1,6 +1,9 @@
 {
   "files": [],
   "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
     "target": "ESNext",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",

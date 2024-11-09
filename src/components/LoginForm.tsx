@@ -1,4 +1,5 @@
-import type { LoginRequest } from "@interfaces/auth/LoginRequest";
+import type { LoginRequest } from  "../interfaces/auth/LoginRequest";
+
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 
@@ -30,7 +31,7 @@ export default function LoginForm() {
 
 	return (
 		<section className="login-section bg-secondary p-4 rounded-2xl">
-			<h1 className="title">Ingresar a Uber</h1>
+			<h1 className="title">Ingresar a Amazon black box</h1>
 			<form onSubmit={handleSubmit}>
 				<div>
 					<label htmlFor="username">Nombre de usuario</label>

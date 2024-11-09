@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function RegisterForm(props: RegisterFormProps) {
 	const [formData, setFormData] = useState({
 		username: "",
-		passsword: "",
+		password: "",
 		rol: "",
 	});
 
@@ -46,14 +46,14 @@ export default function RegisterForm(props: RegisterFormProps) {
 						type="text"
 						name="password"
 						id="password"
-						value={formData.passsword}
+						value={formData.password}
 						onChange={handleChange}
 					/>
 				</div>
 				<div>
 					<label htmlFor="role">rol</label>
 					<input
-						type="role"
+						type="text"
 						name="role"
 						id="role"
 						value={formData.rol}
