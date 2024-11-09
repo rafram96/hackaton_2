@@ -1,6 +1,7 @@
 import type { LoginRequest } from  "../interfaces/auth/LoginRequest";
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
+import axios from "axios";  
 
 export default function LoginForm() {
 	
@@ -24,10 +25,22 @@ export default function LoginForm() {
 	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		try {
-			setSuccessMessage("Login successful!");
-		} catch {
-			setError("Login failed. Please try again.");
-			setSuccessMessage(null);
+	
+			const response = await axios.post("https://nn1h052dp5.execute-api.us-east-2.amazonaws.com/v1/auth/login", formData);
+			if (response.status === 200) {
+                console.log("Exito");
+				setSuccessMessage("¡Inicio de sesión exitoso!");
+			}
+		} catch (err: any) {
+			if (err.response) {
+				if (err.response.status === 401) {
+					setError("Credenciales incorrectas. Inténtalo de nuevo.");
+				} else {
+					setError("Error en el servidor. Por favor, inténtalo más tarde.");
+				}
+			} else {
+				setError("Ocurrió un error inesperado. Inténtalo de nuevo.");
+			}
 		}
 	}
 

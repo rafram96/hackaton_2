@@ -1,13 +1,15 @@
 import { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
+import axios from "axios";
 
 export default function RegisterForm() {
 	const [formData, setFormData] = useState({
 		username: "",
 		password: "",
-		rol: "",
+		role: "",
 	});
-
+	const [error, setError] = useState<string | null>(null);
+  	const [successMessage, setSuccessMessage] = useState<string | null>(null);
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
@@ -18,6 +20,35 @@ export default function RegisterForm() {
 
 	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		setError(null);
+    	setSuccessMessage(null);
+
+    	try {
+      		const response = await fetch("https://nn1h052dp5.execute-api.us-east-2.amazonaws.com/v1/auth/register", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			});
+
+      		if (response.status === 201) {
+				console.log("Exito");
+        		setSuccessMessage("¡Registro exitoso!");
+      		}
+    	} catch (err: any) {
+      		if (err.response) {
+        		if (err.response.status === 400) {
+          			setError("Campos faltantes o inválidos.");
+        		} else if (err.response.status === 403) {
+          			setError("No autorizado.");
+        		} else {
+          			setError("Error del servidor. Por favor, inténtalo más tarde.");
+        		}
+      		} else {
+        		setError("Ocurrió un error inesperado. Inténtalo de nuevo.");
+      		}
+    	}
 	}
 
 	return (
@@ -43,16 +74,18 @@ export default function RegisterForm() {
 						id="password"
 						value={formData.password}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<div>
-					<label htmlFor="role">rol</label>
+					<label htmlFor="Role">rol</label>
 					<input
 						type="text"
 						name="role"
 						id="role"
-						value={formData.rol}
+						value={formData.role}
 						onChange={handleChange}
+						required
 					/>
 				</div>
 				<button
@@ -62,6 +95,8 @@ export default function RegisterForm() {
 				>
 					Registrarse
 				</button>
+				{error && <div style={{ color: "red" }}>{error}</div>}
+        		{successMessage && <div style={{ color: "blue" }}>{successMessage}</div>}
 			</form>
 			</section>
 	);
