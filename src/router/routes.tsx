@@ -5,7 +5,7 @@ import RegisterPage from "../pages/RegisterPage";
 
 const routes: RouteProps[] = [
   {
-    path: "/",
+    path: "/auth/login",
     element: <LoginPage />,
   },
   {
