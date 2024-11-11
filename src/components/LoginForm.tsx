@@ -1,6 +1,7 @@
 import type { LoginRequest } from  "../interfaces/auth/LoginRequest";
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
+import { useNavigate } from "react-router-dom"; 
 import axios from "axios";  
 
 export default function LoginForm() {
@@ -13,6 +14,8 @@ export default function LoginForm() {
 
 	const [error, setError] = useState<string | null>(null);
 	const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+    const navigate = useNavigate();
 
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
 		const { name, value } = e.target;
@@ -30,6 +33,7 @@ export default function LoginForm() {
 			if (response.status === 200) {
                 console.log("Exito");
 				setSuccessMessage("¡Inicio de sesión exitoso!");
+                navigate("/dashboard");
 			}
 		} catch (err: any) {
 			if (err.response) {

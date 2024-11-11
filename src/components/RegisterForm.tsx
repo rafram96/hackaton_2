@@ -24,31 +24,33 @@ export default function RegisterForm() {
     	setSuccessMessage(null);
 
     	try {
-      		const response = await fetch("https://nn1h052dp5.execute-api.us-east-2.amazonaws.com/v1/auth/register", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(formData),
-			});
+			const response = await axios.post(
+				"https://nn1h052dp5.execute-api.us-east-2.amazonaws.com/v1/auth/register",
+				formData,
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
 
-      		if (response.status === 201) {
+			if (response.status === 201) {
 				console.log("Exito");
-        		setSuccessMessage("¡Registro exitoso!");
-      		}
-    	} catch (err: any) {
-      		if (err.response) {
-        		if (err.response.status === 400) {
-          			setError("Campos faltantes o inválidos.");
-        		} else if (err.response.status === 403) {
-          			setError("No autorizado.");
-        		} else {
-          			setError("Error del servidor. Por favor, inténtalo más tarde.");
-        		}
-      		} else {
-        		setError("Ocurrió un error inesperado. Inténtalo de nuevo.");
-      		}
-    	}
+				setSuccessMessage("¡Registro exitoso!");
+			}
+		} catch (err: any) {
+			if (err.response) {
+				if (err.response.status === 400) {
+					setError("Campos faltantes o inválidos.");
+				} else if (err.response.status === 403) {
+					setError("No autorizado.");
+				} else {
+					setError("Error del servidor. Por favor, inténtalo más tarde.");
+				}
+			} else {
+				setError("Ocurrió un error inesperado. Inténtalo de nuevo.");
+			}
+		}
 	}
 
 	return (
